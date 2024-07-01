@@ -1,6 +1,6 @@
 package cryptcube.io.semantics;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CosineComparatorTest {
@@ -22,9 +22,9 @@ class CosineComparatorTest {
         String[] uniqueWords = cosineComparator.getUniqueWords();
 
 
-        Assert.assertEquals(expectedWords.length, uniqueWords.length);
+        Assertions.assertEquals(expectedWords.length, uniqueWords.length);
         for (int i = 0; i < expectedWords.length; i++) {
-            Assert.assertEquals(expectedWords[i], uniqueWords[i]);
+            Assertions.assertEquals(expectedWords[i], uniqueWords[i]);
         }
     }
 
@@ -53,8 +53,8 @@ class CosineComparatorTest {
                 cosineComparator.convertToFrequencyVector(inputText2);
 
         for (int i = 0; i < expectedWords.length; i++) {
-            Assert.assertEquals(frequencyVector1[i], actualFrequencyVector1[i]);
-            Assert.assertEquals(frequencyVector2[i], actualFrequencyVector2[i]);
+            Assertions.assertEquals(frequencyVector1[i], actualFrequencyVector1[i]);
+            Assertions.assertEquals(frequencyVector2[i], actualFrequencyVector2[i]);
         }
     }
 
@@ -69,7 +69,7 @@ class CosineComparatorTest {
         );
 
         double cosineDistance = cosineComparator.getCosineDistance();
-        Assert.assertEquals(0.2d, cosineDistance, 0.0001d);
+        Assertions.assertEquals(0.2d, cosineDistance, 0.0001d);
     }
 
     @Test
@@ -82,7 +82,7 @@ class CosineComparatorTest {
         );
 
         double cosineDistance = cosineComparator.getCosineDistance();
-        Assert.assertEquals(0.0d, cosineDistance, 0.0001d);
+        Assertions.assertEquals(0.0d, cosineDistance, 0.0001d);
     }
 
     @Test
@@ -95,7 +95,7 @@ class CosineComparatorTest {
         );
 
         double cosineDistance = cosineComparator.getCosineDistance();
-        Assert.assertEquals(1.0d, cosineDistance, 0.0001d);
+        Assertions.assertEquals(1.0d, cosineDistance, 0.0001d);
     }
 
     @Test
@@ -108,9 +108,9 @@ class CosineComparatorTest {
                                                     null
             );
             Double cosineDistance = cosineComparator.getCosineDistance();
-            Assert.assertTrue(false);
+            Assertions.fail();
         } catch (Exception e) {
-            Assert.assertTrue(true);
+            Assertions.assertTrue(true);
         }
     }
 
@@ -133,7 +133,7 @@ class CosineComparatorTest {
                 vector1,
                 vector2
                                                                  );
-        Assert.assertEquals(expectedDotProduct, actualDotProduct);
+        Assertions.assertEquals(expectedDotProduct, actualDotProduct);
     }
 
     @Test
@@ -155,7 +155,7 @@ class CosineComparatorTest {
                     vector2
                                                                );
         } catch (IllegalArgumentException illegalArgumentException) {
-            Assert.assertEquals("Two input vectors are not of the same length", illegalArgumentException.getMessage());
+            Assertions.assertEquals("Two input vectors are not of the same length", illegalArgumentException.getMessage());
         }
     }
 
@@ -172,13 +172,13 @@ class CosineComparatorTest {
         Integer[] vector1 = {2, 3, 0};
         Integer[] vector2 = {2, 5, 6};
 
-        Double expectedMagnitude1 = 13.0d;
-        Double expectedMagnitude2 = 65.0d;
+        double expectedMagnitude1 = 13.0d;
+        double expectedMagnitude2 = 65.0d;
 
         Double actualMagnitude1 = cosineComparator.getMagnitude(vector1);
         Double actualMagnitude2 = cosineComparator.getMagnitude(vector2);
 
-        Assert.assertEquals(expectedMagnitude1, actualMagnitude1, 0.001d);
-        Assert.assertEquals(expectedMagnitude2, actualMagnitude2, 0.001d);
+        Assertions.assertEquals(expectedMagnitude1, actualMagnitude1, 0.001d);
+        Assertions.assertEquals(expectedMagnitude2, actualMagnitude2, 0.001d);
     }
 }

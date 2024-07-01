@@ -1,9 +1,6 @@
 package cryptcube.io.semantics;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class CosineComparator {
     private String   inputText1;
@@ -48,12 +45,8 @@ public class CosineComparator {
         String[] wordsText2 = inputText2.split(" ");
 
         Set<String> uniqueWords = new HashSet<>();
-        for (String word : wordsText1) {
-            uniqueWords.add(word);
-        }
-        for (String word : wordsText2) {
-            uniqueWords.add(word);
-        }
+        uniqueWords.addAll(Arrays.asList(wordsText1));
+        uniqueWords.addAll(Arrays.asList(wordsText2));
 
         String[] uniqueWordsArray = new String[uniqueWords.size()];
         int i = 0;
@@ -69,8 +62,7 @@ public class CosineComparator {
         for (String word : inputText.split(" ")) {
             if (histogram.containsKey(word)) {
                 int frequency = histogram.get(word);
-                frequency = frequency + 1;
-                histogram.put(word, frequency);
+                histogram.put(word, ++frequency);
             } else {
                 histogram.put(word, 1);
             }
@@ -85,9 +77,9 @@ public class CosineComparator {
     }
 
     public Double getMagnitude(Integer[] vector) {
-        Double magnitude = 0.0d;
-        for (int i = 0; i < vector.length; i++) {
-            magnitude += vector[i] * vector[i];
+        double magnitude = 0.0d;
+        for (Integer integer : vector) {
+            magnitude += integer * integer;
         }
         return magnitude;
     }
@@ -98,7 +90,7 @@ public class CosineComparator {
                                                        "the same length");
         }
 
-        Integer dotProduct = 0;
+        int dotProduct = 0;
         for (int i = 0; i < vector1.length; i++) {
             dotProduct += (vector1[i] * vector2[i]);
         }
